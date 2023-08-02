@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Simple Chatbot</title>
+</head>
+<body>
+    <div id="chat-box">
+        <div id="messages"></div>
+        <label for="">escribe 1 para hablar con ximena</label><br>
+        <label for="">escribe 2 para hablar con eric</label>
+        <input id="user-input" type="text" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    <script>
+        function addMessage(content, sender) {
+    var messagesDiv = document.getElementById('messages');
+    var message = document.createElement('div');
+    message.className = sender;
+    message.textContent = content;
+    messagesDiv.appendChild(message);
+}
+
+function sendMessage() {
+    var userInput = document.getElementById('user-input').value;
+    addMessage(userInput, 'user');
+    document.getElementById('user-input').value = '';
+
+    var botResponse = getBotResponse(userInput);
+    addMessage(botResponse, 'bot');
+}
+
+function getBotResponse(input) {
+    input = input.toLowerCase();
+    if (input.includes('1')) return 'Hola soy ximena!';
+    if (input.includes('2')) return 'Hola soy Eric';
+    if (input.includes('what is your name')) return 'I\'m a simple JavaScript chatbot.';
+    return 'Sorry, I don\'t understand that question.';
+}
+
+    </script>
+</body>
+</html>
